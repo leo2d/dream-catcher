@@ -22,3 +22,35 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar-inverse {
+    background-color: #6695a9;
+    border-color: #6695a9;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.panel-primary > .panel-heading {
+    color: #fff;
+    background-color: #a5a7aa;
+    border-color: #a5a7aa;
+}
+
+.panel-primary {
+    border-color: #a5a7aa;
+}
+
+.dream{
+    width:70% !important;
+    height:70% !important;
+}
+
+.btn-color {
+    color: #fff;
+    background-color: #6695a9;
+    border-color: #6697a9;
+}
+
+
