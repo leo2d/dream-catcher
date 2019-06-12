@@ -171,7 +171,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CreateUser.cshtml" />
     <Content Include="Views\Home\_AddEdtUser.cshtml" />
-    <Content Include="Views\Home\Dreams.cshtml" />
+    <Content Include="Views\Dream\Dreams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
