@@ -80,6 +80,10 @@
       <Project>{05A4D296-05DC-4829-8BA5-D8E92FE1E969}</Project>
       <Name>DreamCatcher.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DreamCatcher.Infra.Data\DreamCatcher.Infra.Data.csproj">
+      <Project>{1F96C62D-B5AB-4ACF-9E5C-1F0DCD75D072}</Project>
+      <Name>DreamCatcher.Infra.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

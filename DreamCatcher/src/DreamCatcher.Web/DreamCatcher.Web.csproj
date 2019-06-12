@@ -127,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,6 +168,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -193,6 +195,10 @@
     <ProjectReference Include="..\DreamCatcher.Infra.CrossCutting.IoC\DreamCatcher.Infra.CrossCutting.IoC.csproj">
       <Project>{56D40A10-9800-4019-BF7C-BA36851909EC}</Project>
       <Name>DreamCatcher.Infra.CrossCutting.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DreamCatcher.Models\DreamCatcher.Models.csproj">
+      <Project>{b3dcb7ba-b5fe-4143-9fba-886e41916aa9}</Project>
+      <Name>DreamCatcher.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

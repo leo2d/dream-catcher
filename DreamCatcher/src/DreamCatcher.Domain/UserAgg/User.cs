@@ -4,7 +4,8 @@ namespace DreamCatcher.Domain.UserAgg
 {
     public class User : BaseEntity<User>
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Login { get; set; }
+        public virtual string Password { get; set; }
     }
 }

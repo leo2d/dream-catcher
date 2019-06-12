@@ -3,9 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Dream Catcher</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
 </head>
 <!--<body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -43,22 +48,22 @@
                 @Html.ActionLink("Dream Catcher", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">                  
-                        <li>
-                            <form class="form-inline navbar-form navbar-left" role="search"
-                                  method="post" action="@Url.Action("Login", "Login")">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Usuario"
-                                           name="usuario">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Senha"
-                                           name="senha">
-                                </div>
-                                <button type="submit" class="btn btn-default">Entrar</button>
-                            </form>
-                        </li>
-                    
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form class="form-inline navbar-form navbar-left" role="search"
+                              method="post" action="@Url.Action("Login", "Login")">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Usuario"
+                                       name="usuario">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Senha"
+                                       name="senha">
+                            </div>
+                            <button type="submit" class="btn btn-default">Entrar</button>
+                        </form>
+                    </li>
+
                 </ul>
             </div>
 
