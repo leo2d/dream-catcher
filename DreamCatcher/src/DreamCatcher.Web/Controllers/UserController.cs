@@ -40,5 +40,23 @@ namespace DreamCatcher.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult Login(UserViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _userService.DoLogin(userViewModel);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+
+            return RedirectToAction("Dreams");
+        }
     }
 }
