@@ -28,5 +28,18 @@ namespace DreamCatcher.Domain.DreamAgg.Services
             }
         }
 
+        public IEnumerable<Dream> GetByUserId(Guid id)
+        {
+            try
+            {
+                var dreams = _dreamRepository.GetByUserId(id);
+                return dreams;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }
