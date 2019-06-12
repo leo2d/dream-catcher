@@ -16,6 +16,7 @@ namespace DreamCatcher.Infra.Data.Repositories
         public RepositoryBase(NHibernateConnectionFactory connectionFactory)
         {
             _connectionFactory = connectionFactory;
+            _session = _connectionFactory.OpenSession();
         }
 
         //public RepositoryBase(ISession session)
