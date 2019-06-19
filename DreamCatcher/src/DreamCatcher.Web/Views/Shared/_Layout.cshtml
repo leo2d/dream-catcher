@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using DreamCatcher.Domain.SharedKernel.Helpers;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,29 +14,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 </head>
-<!--<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        <hr />
-        <footer>
-        </footer>
-    </div>
-
-</body>-->
 
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -49,21 +28,34 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <form class="form-inline navbar-form navbar-left" role="search"
-                              method="post" action="@Url.Action("Login", "Login")">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Usuario"
-                                       name="usuario">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Senha"
-                                       name="senha">
-                            </div>
-                            <button type="submit" class="btn btn-default">Entrar</button>
-                        </form>
-                    </li>
 
+                    @{
+                        if (!SessionHelper.UserLogged())
+                        {
+                            <li>
+                                <form class="form-inline navbar-form navbar-left" role="search"
+                                      method="post" action="@Url.Action("Login", "User")">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Usuario"
+                                               name="login">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Senha"
+                                               name="password">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Entrar</button>
+                                </form>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Objetivos", "Index", "Dream", new { @class = "text-danger"})</li>
+                            <li>@Html.ActionLink("Cadastrar Objetivo", "Create", "Dream")</li>
+                            <li>@Html.ActionLink(@SessionHelper.Getuser().Name, "Index", "Dream")</li>
+
+                        }
+                    }
                 </ul>
             </div>
 

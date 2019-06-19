@@ -24,6 +24,7 @@ namespace DreamCatcher.Infra.CrossCutting.IoC.Autofac
             //    .As<IUserRepository>();
 
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
+            builder.RegisterType<DreamRepository>().As<IDreamRepository>().InstancePerRequest();
 
         }
     }

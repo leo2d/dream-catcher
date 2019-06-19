@@ -22,6 +22,9 @@ namespace DreamCatcher.Domain.UserAgg.Services
                 var user = MapViewModelToDomain(userVm: userViewModel);
 
                 _userRepository.Create(user);
+
+                SessionHelper.Setuser(user);
+
             }
             catch (Exception ex)
             {
@@ -30,12 +33,12 @@ namespace DreamCatcher.Domain.UserAgg.Services
             }
         }
 
-        public bool DoLogin(UserViewModel userViewModel)
+        public bool DoLogin(string login, string password)
         {
             try
             {
-                var user = _userRepository.GetByLoginAndPassword(
-                    userViewModel.Login, userViewModel.Password);
+                var user = _userRepository
+                    .GetByLoginAndPassword(login, password);
 
                 if (null != user)
                 {

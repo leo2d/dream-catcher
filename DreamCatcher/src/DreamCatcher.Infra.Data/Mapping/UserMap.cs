@@ -1,11 +1,6 @@
 ﻿using DreamCatcher.Domain.UserAgg;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DreamCatcher.Infra.Data.Mapping
 {
@@ -19,6 +14,15 @@ namespace DreamCatcher.Infra.Data.Mapping
             Property(x => x.Login);
             Property(x => x.Password);
 
+            Bag(x => x.Dreams, m =>
+            {
+                m.Inverse(true);
+                m.Cascade(Cascade.DeleteOrphans);
+                m.Lazy(CollectionLazy.Lazy);
+                m.Key(k => k.Column("userId"));
+            },
+              o => o.OneToMany()
+          );
         }
     }
 }

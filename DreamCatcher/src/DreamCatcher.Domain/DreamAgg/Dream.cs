@@ -8,11 +8,18 @@ namespace DreamCatcher.Domain.DreamAgg
 {
     public class Dream : BaseEntity<Dream>
     {
+        public Dream()
+        {
+            Tasks = new List<DreamTask>();
+        }
+
         public virtual string Title { get; set; }
         public virtual bool IsDone { get; set; }
+        public virtual DateTime RegisterDate { get; set; }
 
         public virtual Guid IDUser { get; set; }
         public virtual User User { get; set; }
-        public virtual IEnumerable<DreamTask> Tasks { get; set; }
+
+        public virtual IList<DreamTask> Tasks { get; set; }
     }
 }

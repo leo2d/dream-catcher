@@ -9,7 +9,7 @@ namespace DreamCatcher.Domain.UserAgg.Contracts
 {
     public interface IUserService
     {
-        bool DoLogin(UserViewModel userViewModel);
+        bool DoLogin(string login, string password);
         bool DoLogout(UserViewModel userViewModel);
         void Create(UserViewModel userViewModel);
         void Update(UserViewModel userViewModel);

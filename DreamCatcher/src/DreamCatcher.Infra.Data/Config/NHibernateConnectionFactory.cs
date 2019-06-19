@@ -28,6 +28,8 @@ namespace DreamCatcher.Infra.Data.Config
         {
             _configuration = new Configuration();
             Configure();
+            _sessionFactory = _configuration.BuildSessionFactory();
+
             //      InitializeDB();
 
             //UserRepository = new UserRepository(Session);
@@ -125,7 +127,7 @@ namespace DreamCatcher.Infra.Data.Config
                 var mapper = new ModelMapper();
 
                 mapper.AddMappings(
-                    Assembly.GetAssembly(typeof(UserMap)).GetTypes()
+                    Assembly.GetAssembly(typeof(DreamMap)).GetTypes()
                 );
 
                 return mapper.CompileMappingForAllExplicitlyAddedEntities();
@@ -140,7 +142,7 @@ namespace DreamCatcher.Infra.Data.Config
         {
             if (_session == null)
             {
-                //_session = _sessionFactory.OpenSession();
+                _session = _sessionFactory.OpenSession();
                 if (CurrentSessionContext.HasBind(_sessionFactory))
                     return _sessionFactory.GetCurrentSession();
 

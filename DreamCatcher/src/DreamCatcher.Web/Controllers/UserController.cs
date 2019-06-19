@@ -1,9 +1,6 @@
 ﻿using DreamCatcher.Domain.UserAgg.Contracts;
 using DreamCatcher.Models.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DreamCatcher.Web.Controllers
@@ -18,11 +15,6 @@ namespace DreamCatcher.Web.Controllers
             _userService = userService;
         }
 
-        public ActionResult Test()
-        {
-            return View("Index");
-        }
-
         public ActionResult Create(UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
@@ -30,6 +22,8 @@ namespace DreamCatcher.Web.Controllers
                 try
                 {
                     _userService.Create(userViewModel);
+                    return RedirectToAction("Index", "Dream");
+
                 }
                 catch (Exception ex)
                 {
@@ -39,6 +33,30 @@ namespace DreamCatcher.Web.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Login(string login, string password)
+        {
+            if (!String.IsNullOrEmpty(login) && !String.IsNullOrEmpty(password))
+            {
+                try
+                {
+                    var success = _userService.DoLogin(login, password);
+
+                    if (success)
+                    {
+                        return RedirectToAction("Index", "Dream");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

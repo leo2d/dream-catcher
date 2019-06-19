@@ -26,7 +26,16 @@ namespace DreamCatcher.Domain.SharedKernel.Helpers
 
         public static User Getuser()
         {
-            return (User)HttpContext.Current.Session[userKey];
+
+            return (null != HttpContext.Current.Session[userKey]) 
+                ? (User)HttpContext.Current.Session[userKey] 
+                : null;
+
+        }
+
+        public static bool UserLogged()
+        {
+            return null != HttpContext.Current.Session[userKey];
         }
 
         public static void RemoveUser()
