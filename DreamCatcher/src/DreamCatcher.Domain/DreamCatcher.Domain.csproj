@@ -44,9 +44,12 @@
   <ItemGroup>
     <Compile Include="DreamAgg\Contracts\IDreamRepository.cs" />
     <Compile Include="DreamAgg\Contracts\IDreamService.cs" />
+    <Compile Include="DreamAgg\Contracts\IDreamTaskService.cs" />
+    <Compile Include="DreamAgg\Contracts\IDreasmTaskRepository.cs" />
     <Compile Include="DreamAgg\Dream.cs" />
     <Compile Include="DreamAgg\Entities\DreamTask.cs" />
     <Compile Include="DreamAgg\Services\DreamService.cs" />
+    <Compile Include="DreamAgg\Services\DreamTaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedKernel\Entities\BaseEntity.cs" />
     <Compile Include="SharedKernel\Helpers\SessionHelper.cs" />

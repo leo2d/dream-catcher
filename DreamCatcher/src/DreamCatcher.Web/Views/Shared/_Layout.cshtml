@@ -51,7 +51,7 @@
                         else
                         {
                             <li>@Html.ActionLink("Objetivos", "Index", "Dream", new { @class = "text-danger"})</li>
-                            <li>@Html.ActionLink("Cadastrar Objetivo", "Create", "Dream")</li>
+                            @*<li>@Html.ActionLink("Cadastrar Objetivo", "Create", "Dream")</li>*@
                             <li>@Html.ActionLink(@SessionHelper.Getuser().Name, "Index", "Dream")</li>
 
                         }

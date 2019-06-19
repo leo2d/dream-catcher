@@ -1,4 +1,5 @@
 ﻿using DreamCatcher.Domain.DreamAgg.Contracts;
+using DreamCatcher.Domain.DreamAgg.Entities;
 using DreamCatcher.Domain.SharedKernel.Helpers;
 using DreamCatcher.Models.ViewModels;
 using System;
@@ -16,11 +17,11 @@ namespace DreamCatcher.Domain.DreamAgg.Services
             _dreamRepository = dreamRepository;
         }
 
-        public void Create(DreamVIewModel dreamVIewModel)
+        public void CreateDream(DreamVIewModel dreamVIewModel)
         {
             try
             {
-                
+
                 var dream = MapToDomain(dreamVIewModel);
 
                 dream.RegisterDate = DateTime.Now;
@@ -35,7 +36,7 @@ namespace DreamCatcher.Domain.DreamAgg.Services
             }
         }
 
-        public IEnumerable<DreamVIewModel> GetByUserId(Guid id)
+        public IEnumerable<DreamVIewModel> GetDreamByUserId(Guid id)
         {
             try
             {
@@ -51,6 +52,56 @@ namespace DreamCatcher.Domain.DreamAgg.Services
             }
         }
 
+        public DreamVIewModel GetDreamById(Guid id)
+        {
+            try
+            {
+                var dream = _dreamRepository.GetById(id);
+
+                var dreamVm = MapToViewModel(dream);
+
+                return dreamVm;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateDream(DreamVIewModel dreamVIewModel)
+        {
+            try
+            {
+                var dream = MapToDomain(dreamVIewModel);
+
+                _dreamRepository.Update(dream);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteDream(Guid id)
+        {
+            try
+            {
+                var dream = _dreamRepository.GetById(id);
+
+                if (null != dream)
+                    _dreamRepository.Delete(dream);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        #region mapping
         private IEnumerable<DreamVIewModel> MapToViewModel(IEnumerable<Dream> dreams)
         {
             var result = new List<DreamVIewModel>();
@@ -75,7 +126,6 @@ namespace DreamCatcher.Domain.DreamAgg.Services
                 Tasks = new List<DreamTaskViewModel>()
             };
         }
-
         private Dream MapToDomain(DreamVIewModel dreamVm)
         {
             return new Dream()
@@ -87,38 +137,6 @@ namespace DreamCatcher.Domain.DreamAgg.Services
                 User = SessionHelper.Getuser(),
             };
         }
-
-        public DreamVIewModel GetById(Guid id)
-        {
-            try
-            {
-                var dream = _dreamRepository.GetById(id);
-
-                var dreamVm = MapToViewModel(dream);
-
-                return dreamVm;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-
-        public void Update(DreamVIewModel dreamVIewModel)
-        {
-            try
-            {
-                var dream = MapToDomain(dreamVIewModel);
-
-                _dreamRepository.Update(dream);
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
+        #endregion
     }
 }

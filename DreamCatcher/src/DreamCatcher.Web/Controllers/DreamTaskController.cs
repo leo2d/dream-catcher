@@ -1,37 +1,37 @@
-﻿using DreamCatcher.Domain.DreamAgg;
-using DreamCatcher.Domain.DreamAgg.Contracts;
+﻿using DreamCatcher.Domain.DreamAgg.Contracts;
 using DreamCatcher.Domain.SharedKernel.Helpers;
 using DreamCatcher.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace DreamCatcher.Web.Controllers
 {
-
     [AllowAnonymous]
-    public class DreamController : Controller
+    public class DreamTaskController: Controller
     {
-        private readonly IDreamService _dreamService;
 
-        public DreamController(IDreamService dreamService)
+        private readonly IDreamTaskService _taskService;
+
+        public DreamTaskController(IDreamTaskService taskService)
         {
-            _dreamService = dreamService;
+            _taskService = taskService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(Guid dreamId)
         {
             try
             {
-                var user = SessionHelper.Getuser();
-                if (null != user)
+                if (dreamId != Guid.Empty)
                 {
-                    var dreams = _dreamService.GetDreamByUserId(user.Id);
+                    var dreams = _taskService.GetTasksByDreamId(dreamId);
                     return View(dreams);
 
                 }
 
-                return View(new List<Dream>());
+                return View(new List<DreamTaskViewModel>());
             }
             catch (Exception)
             {
@@ -42,18 +42,18 @@ namespace DreamCatcher.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(Guid dreamId)
         {
             ViewBag.Edit = false;
-            return PartialView("DreamModal", new DreamVIewModel() { RegisterDate = DateTime.Now });
+            return PartialView("DreamTaskModal", new DreamTaskViewModel() { IdDream = dreamId });
         }
 
         [HttpPost]
-        public ActionResult Create(DreamVIewModel dreamVIewModel)
+        public ActionResult Create(DreamTaskViewModel taskViewModel)
         {
             try
             {
-                _dreamService.CreateDream(dreamVIewModel);
+                _taskService.Create(taskViewModel);
             }
             catch (Exception ex)
             {
@@ -71,10 +71,10 @@ namespace DreamCatcher.Web.Controllers
             {
                 ViewBag.Edit = true;
 
-                var dream = _dreamService.GetDreamById(id);
+                var task = _taskService.GetTasksById(id);
 
-                if(null != dream)
-                    return PartialView("DreamModal", dream);
+                if (null != task)
+                    return PartialView("DreamTaskModal", task);
 
                 return RedirectToAction("Index");
 
@@ -88,12 +88,11 @@ namespace DreamCatcher.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(DreamVIewModel dreamVIewModel)
+        public ActionResult Edit(DreamTaskViewModel DreamTaskViewModel)
         {
             try
             {
-                dreamVIewModel.IDUser = SessionHelper.Getuser().Id;
-                _dreamService.UpdateDream(dreamVIewModel);
+                _taskService.Update(DreamTaskViewModel);
             }
             catch (Exception ex)
             {
@@ -109,7 +108,7 @@ namespace DreamCatcher.Web.Controllers
         {
             try
             {
-                _dreamService.DeleteDream(id);
+                _taskService.Delete(id);
             }
             catch (Exception ex)
             {

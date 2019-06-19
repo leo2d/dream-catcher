@@ -6,9 +6,10 @@ namespace DreamCatcher.Domain.DreamAgg.Contracts
 {
     public interface IDreamService
     {
-        IEnumerable<DreamVIewModel> GetByUserId(Guid id);
-        void Create(DreamVIewModel dreamVIewModel);
-        DreamVIewModel GetById(Guid id);
-        void Update(DreamVIewModel dreamVIewModel);
+        IEnumerable<DreamVIewModel> GetDreamByUserId(Guid id);
+        void CreateDream(DreamVIewModel dreamVIewModel);
+        DreamVIewModel GetDreamById(Guid id);
+        void UpdateDream(DreamVIewModel dreamVIewModel);
+        void DeleteDream(Guid id);
     }
 }

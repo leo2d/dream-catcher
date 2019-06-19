@@ -15,6 +15,7 @@ namespace DreamCatcher.Infra.CrossCutting.IoC.Autofac
         {
             //Domain services
             builder.RegisterType<DreamService>().As<IDreamService>().InstancePerRequest();
+            builder.RegisterType<DreamTaskService>().As<IDreamTaskService>().InstancePerRequest();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerRequest();
 
 
@@ -25,6 +26,7 @@ namespace DreamCatcher.Infra.CrossCutting.IoC.Autofac
 
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerRequest();
             builder.RegisterType<DreamRepository>().As<IDreamRepository>().InstancePerRequest();
+            builder.RegisterType<DreamTaskRepository>().As<IDreamTaskRepository>().InstancePerRequest();
 
         }
     }

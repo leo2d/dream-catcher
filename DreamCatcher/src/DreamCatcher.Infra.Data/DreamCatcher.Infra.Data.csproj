@@ -81,6 +81,7 @@
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DreamRepository.cs" />
+    <Compile Include="Repositories\DreamTaskRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
