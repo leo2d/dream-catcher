@@ -176,6 +176,7 @@
     <Content Include="Views\Dream\Create.cshtml" />
     <Content Include="Views\Dream\DreamModal.cshtml" />
     <Content Include="Views\DreamTask\DreamTaskModal.cshtml" />
+    <Content Include="Views\DreamTask\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

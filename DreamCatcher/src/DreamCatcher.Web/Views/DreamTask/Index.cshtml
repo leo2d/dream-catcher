@@ -1,18 +1,15 @@
-﻿@model IEnumerable<DreamCatcher.Models.ViewModels.DreamVIewModel>
+﻿@model IEnumerable<DreamCatcher.Models.ViewModels.DreamTaskViewModel>
 
 @{
     ViewBag.Title = "Index";
+    Guid idDream = ViewBag.IdDream;
 }
-
-<h2>Objetivos</h2>
 
 <p>
     <button id="#nova" class="btn btn-info " type="button" onclick="getModal()">
-        Criar Objetivo
+        Adicionar Tarefa
     </button>
 </p>
-
-
 
 <table class="table">
     <tr>
@@ -21,12 +18,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsDone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegisterDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User)
         </th>
         <th></th>
     </tr>
@@ -41,33 +32,31 @@
                 @Html.DisplayFor(modelItem => item.IsDone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RegisterDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User)
-            </td>
-            <td>
-                <button type="button" class="btn btn-warning" onclick="getEditModal('@item.Id')">
-                    Editar
-                </button>
+
+                @{
+                    if (!item.IsDone)
+                    {
+                        <a class="btn btn-success"
+                           href="@Url.Action("MarkDone", "DreamTask", new { id = item.Id })">
+                            Fechar Tarefa
+                        </a>
+
+                        <button type="button" class="btn btn-warning" onclick="getEditModal('@item.Id')">
+                            Editar
+                        </button>
+                    }
+                }
+
                 <a class="btn btn-danger"
-                   href="@Url.Action("Delete", "Dream", new { id = item.Id })">
+                   href="@Url.Action("Delete", "DreamTask", new { id = item.Id })">
                     Apagar
                 </a>
-                <a class="btn btn-info"
-                   href="@Url.Action("Index", "DreamTask", new { dreamId = item.Id })">
-                    Tarefas
-                </a>
-
-
-                @*@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |*@
-             @*   @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |*@
-                @*@Html.ActionLink("Apagar", "Delete", new { id = item.Id })*@
             </td>
         </tr>
     }
 
 </table>
+
 
 <div class="modal" id="modal">
 
@@ -79,13 +68,13 @@
 
 <script>
     function getModal() {
-        $("#modal").load('@Url.Action("Create", "Dream")', () => {
+        $("#modal").load('@Url.Action("Create", "DreamTask", new { dreamId =  idDream})', () => {
             $("#modal").modal();
         });
     }
 
     function getEditModal(idDream) {
-        $("#modal").load('Dream/Edit/' + idDream, () => {
+        $("#modal").load('DreamTask/Edit/' + idDream, () => {
             $("#modal").modal();
         });
     }

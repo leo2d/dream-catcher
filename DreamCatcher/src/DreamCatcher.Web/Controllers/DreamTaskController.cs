@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace DreamCatcher.Web.Controllers
 {
     [AllowAnonymous]
-    public class DreamTaskController: Controller
+    public class DreamTaskController : Controller
     {
 
         private readonly IDreamTaskService _taskService;
@@ -26,14 +26,16 @@ namespace DreamCatcher.Web.Controllers
             {
                 if (dreamId != Guid.Empty)
                 {
-                    var dreams = _taskService.GetTasksByDreamId(dreamId);
-                    return View(dreams);
+                    ViewBag.IdDream = dreamId;
+
+                    var tasks = _taskService.GetTasksByDreamId(dreamId);
+                    return View(tasks);
 
                 }
 
                 return View(new List<DreamTaskViewModel>());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -61,7 +63,7 @@ namespace DreamCatcher.Web.Controllers
                 throw;
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { dreamId = taskViewModel.IdDream });
         }
 
         [HttpGet]
@@ -76,7 +78,29 @@ namespace DreamCatcher.Web.Controllers
                 if (null != task)
                     return PartialView("DreamTaskModal", task);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { dreamId = task.IdDream });
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+                throw;
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult MarkDone(Guid id)
+        {
+            try
+            {
+                if (Guid.Empty != id)
+                    _taskService.MarkDone(id);
+
+                var idDream = _taskService.GetTasksById(id).IdDream;
+
+                return RedirectToAction("Index", new { dreamId = idDream });
+
 
             }
             catch (Exception ex)
@@ -101,13 +125,16 @@ namespace DreamCatcher.Web.Controllers
                 throw;
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { dreamId = DreamTaskViewModel.IdDream });
+
         }
 
         public ActionResult Delete(Guid id)
         {
+            Guid idDream;
             try
             {
+                idDream = _taskService.GetTasksById(id).IdDream;
                 _taskService.Delete(id);
             }
             catch (Exception ex)
@@ -116,7 +143,7 @@ namespace DreamCatcher.Web.Controllers
                 throw;
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { dreamId = idDream });
 
         }
     }

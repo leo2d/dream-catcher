@@ -3,6 +3,7 @@ using DreamCatcher.Domain.DreamAgg.Entities;
 using DreamCatcher.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DreamCatcher.Domain.DreamAgg.Services
 {
@@ -123,6 +124,22 @@ namespace DreamCatcher.Domain.DreamAgg.Services
 
                 _taskRepository.Delete(task);
 
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void MarkDone(Guid id)
+        {
+            try
+            {
+                var task = _taskRepository.GetById(id);
+                task.IsDone = true;
+
+                _taskRepository.Update(task);
             }
             catch (Exception ex)
             {

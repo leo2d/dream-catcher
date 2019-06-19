@@ -13,6 +13,7 @@ namespace DreamCatcher.Domain.DreamAgg.Contracts
         DreamTaskViewModel GetTasksById(Guid id);
         void Create(DreamTaskViewModel taskViewModel);
         void Update(DreamTaskViewModel taskViewModel);
+        void MarkDone(Guid id);
         void Delete(Guid id);
     }
 }
