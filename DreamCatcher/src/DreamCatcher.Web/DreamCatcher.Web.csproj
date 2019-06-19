@@ -173,6 +173,7 @@
     <Content Include="Views\Home\_AddEdtUser.cshtml" />
     <Content Include="Views\Dream\Index.cshtml" />
     <Content Include="Views\Dream\Create.cshtml" />
+    <Content Include="Views\Dream\DreamModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

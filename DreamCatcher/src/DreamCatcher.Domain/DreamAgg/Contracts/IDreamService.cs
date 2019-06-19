@@ -8,5 +8,7 @@ namespace DreamCatcher.Domain.DreamAgg.Contracts
     {
         IEnumerable<DreamVIewModel> GetByUserId(Guid id);
         void Create(DreamVIewModel dreamVIewModel);
+        DreamVIewModel GetById(Guid id);
+        void Update(DreamVIewModel dreamVIewModel);
     }
 }

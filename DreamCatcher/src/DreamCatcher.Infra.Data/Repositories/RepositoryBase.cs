@@ -46,12 +46,17 @@ namespace DreamCatcher.Infra.Data.Repositories
 
         public void Update(T entity)
         {
+            var tr = Session.BeginTransaction();
             Session.Update(entity);
+            tr.Commit();
+
         }
 
         public void Delete(T entity)
         {
+            var tr = Session.BeginTransaction();
             Session.Delete(entity);
+            tr.Commit();
 
         }
     }

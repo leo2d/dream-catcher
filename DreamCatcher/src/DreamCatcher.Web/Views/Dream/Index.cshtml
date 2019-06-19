@@ -7,8 +7,13 @@
 <h2>Objetivos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button id="#nova" class="btn btn-info " type="button" onclick="getModal()">
+        Criar Objetivo
+    </button>
 </p>
+
+
+
 <table class="table">
     <tr>
         <th>
@@ -42,11 +47,42 @@
                 @Html.DisplayFor(modelItem => item.User)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Apagar", "Delete", new { id = item.Id })
+                <button type="button" class="btn btn-info" onclick="getEditModal('@item.Id')">
+                    Editar
+                </button>
+                <a class="btn btn-danger"
+                   href="@Url.Action("Delete", "Dream", new { id = item.Id })">
+                    Apagar
+                </a>
+
+                @*@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |*@
+             @*   @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |*@
+                @*@Html.ActionLink("Apagar", "Delete", new { id = item.Id })*@
             </td>
         </tr>
     }
 
 </table>
+
+<div class="modal" id="modal">
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script>
+    function getModal() {
+        $("#modal").load('@Url.Action("Create", "Dream")', () => {
+            $("#modal").modal();
+        });
+    }
+
+    function getEditModal(idDream) {
+        $("#modal").load('Dream/Edit/' + idDream, () => {
+            $("#modal").modal();
+        });
+    }
+
+</script>

@@ -87,5 +87,38 @@ namespace DreamCatcher.Domain.DreamAgg.Services
                 User = SessionHelper.Getuser(),
             };
         }
+
+        public DreamVIewModel GetById(Guid id)
+        {
+            try
+            {
+                var dream = _dreamRepository.GetById(id);
+
+                var dreamVm = MapToViewModel(dream);
+
+                return dreamVm;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void Update(DreamVIewModel dreamVIewModel)
+        {
+            try
+            {
+                var dream = MapToDomain(dreamVIewModel);
+
+                _dreamRepository.Update(dream);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
     }
 }

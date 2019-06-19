@@ -16,13 +16,18 @@ namespace DreamCatcher.Models.ViewModels
         [Required(ErrorMessage = "É obrigatório o Titulo")]
         [Display(Name = "Titulo")]
         public string Title { get; set; }
+
         [Display(Name = "Completo")]
         public bool IsDone { get; set; }
-        [Display(Name ="Data cadastro")]
-        public virtual DateTime RegisterDate { get; set; }
+
+        [DisplayFormat( ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name = "Data cadastro")]
+        [DataType(DataType.Date)]
+        public DateTime RegisterDate { get; set; }
 
 
         public Guid IDUser { get; set; }
+
         [Display(Name = "Sonhador")]
         public string User { get; set; }
         public List<DreamTaskViewModel> Tasks { get; set; }

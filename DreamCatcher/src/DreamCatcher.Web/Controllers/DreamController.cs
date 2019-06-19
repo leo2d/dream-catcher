@@ -44,8 +44,10 @@ namespace DreamCatcher.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            ViewBag.Edit = false;
+            return PartialView("DreamModal", new DreamVIewModel() { RegisterDate = DateTime.Now });
         }
+
         [HttpPost]
         public ActionResult Create(DreamVIewModel dreamVIewModel)
         {
@@ -55,6 +57,48 @@ namespace DreamCatcher.Web.Controllers
             }
             catch (Exception ex)
             {
+
+                throw;
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            try
+            {
+                ViewBag.Edit = true;
+
+                var dream = _dreamService.GetById(id);
+
+                if(null != dream)
+                    return PartialView("DreamModal", dream);
+
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+                throw;
+            }
+
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(DreamVIewModel dreamVIewModel)
+        {
+            try
+            {
+                dreamVIewModel.IDUser = SessionHelper.Getuser().Id;
+                _dreamService.Update(dreamVIewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
 
                 throw;
             }
